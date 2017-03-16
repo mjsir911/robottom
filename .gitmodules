@@ -1,0 +1,3 @@
+[submodule "include/convex"]
+	path = include/convex
+	url = git@github.com:jpearman/convex.git
