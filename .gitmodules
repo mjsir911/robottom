@@ -1,3 +1,6 @@
 [submodule "include/convex"]
 	path = include/convex
 	url = git@github.com:jpearman/convex.git
+[submodule "include/ChibiOS"]
+	path = include/ChibiOS
+	url = git@github.com:ChibiOS/ChibiOS.git
