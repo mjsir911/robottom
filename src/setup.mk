@@ -8,7 +8,7 @@ PROJECT = robos
 BUILDDIR = build
 INCDIR = src
 # uncomment to use the optional code like the smart motor library
-#CONVEX_OPT  = yes
+CONVEX_OPT  = yes
 
 # User C code files
 VEXUSERSRC = src/vexuser.c
