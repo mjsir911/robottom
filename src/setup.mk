@@ -15,4 +15,3 @@ VEXUSERSRC = src/vexuser.c
 
 # Uncomment and add/modify user include files
 VEXUSERINC = src/
-
