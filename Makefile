@@ -237,3 +237,7 @@ ifeq ($(USE_FWLIB),yes)
 endif
 
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/rules.mk
+
+flash all:
+	cortexflash -X -w $(BUILDDIR)/robos.hex -v -g 0x0 /dev/tty.usbmodem1410 
+
