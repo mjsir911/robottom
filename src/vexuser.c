@@ -64,16 +64,16 @@ static  vexDigiCfg  dConfig[kVexDigital_Num] = {
 };
 
 static  vexMotorCfg mConfig[kVexMotorNum] = {
-        { kVexMotor_1,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_2,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_3,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_4,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_5,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_6,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_7,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_8,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_9,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_10,     kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 }
+        { kVexMotor_1,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_2,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_3,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_4,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_5,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_6,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_7,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_8,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_9,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_10,     kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 }
 };
 
 
