@@ -7,6 +7,7 @@ CONVEX     = include/cortex
 PROJECT = robos
 BUILDDIR = build
 INCDIR = src
+#USE_VERBOSE_COMPILE = yes
 # uncomment to use the optional code like the smart motor library
 CONVEX_OPT  = yes
 
