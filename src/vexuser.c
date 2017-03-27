@@ -44,6 +44,7 @@
 
 #include "ch.h"  		// needs for all ChibiOS programs
 #include "hal.h" 		// hardware abstraction layer header
+//#include "vexmotor.h"
 #include "vex.h"		// vex library header
 
 // Digi IO configuration
@@ -63,17 +64,18 @@ static  vexDigiCfg  dConfig[kVexDigital_Num] = {
 };
 
 static  vexMotorCfg mConfig[kVexMotorNum] = {
-        { kVexMotor_1,      kVexMotor393T,           kVexMotorNormal,       kVexSensorIME,         kImeChannel_1 },
-        { kVexMotor_2,      kVexMotorUndefined,      kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_3,      kVexMotorUndefined,      kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_4,      kVexMotorUndefined,      kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_5,      kVexMotorUndefined,      kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_6,      kVexMotorUndefined,      kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_7,      kVexMotorUndefined,      kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_8,      kVexMotorUndefined,      kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_9,      kVexMotorUndefined,      kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_10,     kVexMotor393T,           kVexMotorNormal,       kVexSensorIME,         kImeChannel_2 }
+        { kVexMotor_1,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_2,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_3,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_4,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_5,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_6,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_7,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_8,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_9,      kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_10,     kVexMotor393T,          kVexMotorNormal,       kVexSensorNone,        0 }
 };
+
 
 
 /*-----------------------------------------------------------------------------*/
@@ -97,10 +99,20 @@ vexUserSetup()
  *  been established with the master processor.
  *  Start other tasks and initialize user variables here
  */
-void
-vexUserInit()
+#define motor kVexMotor_10
+#define time  2500
+void vexUserInit()
 {
-
+  while (1) {
+    vexMotorSet(motor, 127);
+    vexSleep( time );
+    vexMotorSet(motor, 0);
+    vexSleep( time );
+    vexMotorSet(motor, -127);
+    vexSleep( time );
+    vexMotorSet(motor, 0);
+    vexSleep( time );
+  }
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -120,6 +132,7 @@ vexAutonomous( void *arg )
     while(1)
         {
         // Don't hog cpu
+        //
         vexSleep( 25 );
         }
 
