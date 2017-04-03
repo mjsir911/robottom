@@ -99,25 +99,28 @@ vexUserSetup()
  *  been established with the master processor.
  *  Start other tasks and initialize user variables here
  */
-#define WHEEL_LEFT  kVexMotor_1
-#define WHEEL_RIGHT kVexMotor_10
-#define TRUE 1
-#define time 2500
+#define TRUE  1
+#define FALSE 0
 
 //Ch1 is vertical, Ch2 is horizontal probably
-#define VERT vexControllerGet(Ch1)
-#define HORI vexControllerGet(Ch2)
+
+
+void wheelMotion(unsigned char left, unsigned char right) {
+  #define WHEEL_LEFT  kVexMotor_1
+  #define WHEEL_RIGHT kVexMotor_10
+  vexMotorSet( WHEEL_RIGHT, right );
+  vexMotorSet( WHEEL_LEFT , left  );
+}
 
 
 void pollMotion(void) {
-  vexMotorSet( WHEEL_LEFT,  VERT-HORI );
-  vexMotorSet( WHEEL_RIGHT, VERT+HORI );
+  #define VERT vexControllerGet(Ch1)
+  #define HORI vexControllerGet(Ch2)
+  wheelMotion( VERT - HORI, VERT + HORI );
 }
 
 void vexUserInit(void) {
-  vexMotorSet( motor, 10 );
-  vexSleep( time );
-  vexMotorSet( motor, 127 );
+  vexAudioPlaySound(256, 100, 100); // say im awake
 
   while (TRUE) {
     pollMotion();
