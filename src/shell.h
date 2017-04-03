@@ -1,3 +1,9 @@
+#include <vexcompat.h>
+// Custom commands go here
+void marcoTest(vexStream *chp, int argc, char *argv[]) {
+  chprintf("hello world\r\n");
+}
+
 /*-----------------------------------------------------------------------------*/
 /* Command line related.                                                       */
 /*-----------------------------------------------------------------------------*/
@@ -14,6 +20,7 @@ static const ShellCommand commands[] = {
   {"son",     vexSonarDebug},
   {"ime",     vexIMEDebug},
   {"test",    vexTestDebug},
+  {"marco",   marcoTest},
    {NULL, NULL}
 };
 
