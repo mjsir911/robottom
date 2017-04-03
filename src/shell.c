@@ -1,7 +1,10 @@
+#include "chprintf.h"
 #include <vexcompat.h>
 // Custom commands go here
 void marcoTest(vexStream *chp, int argc, char *argv[]) {
-  chprintf("hello world\r\n");
+  (void)argc; // gotta stop dem errors
+  (void)argv;
+  chprintf(chp, "hello world\r\n");
 }
 
 /*-----------------------------------------------------------------------------*/
