@@ -45,9 +45,8 @@
 
 #include "ch.h"
 #include "hal.h"
-#include "chprintf.h"
 #include "vex.h"
-#include "shell.h"
+#include "shell.c"
 
 
 /*-----------------------------------------------------------------------------*/

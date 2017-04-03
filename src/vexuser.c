@@ -6,7 +6,7 @@
 #include "vex.h"        // vex library header
 
 //Marco
-#include "motorconfig.h"
+#include "motorconfig.c"
 
 void vexUserInit(void) {
   vexAudioPlaySound(256, 100, 100); // say im awake
