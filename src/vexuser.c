@@ -128,13 +128,15 @@ void vexUserInit()
     }
 
     else if (thingToDo == 1) {
+	
+	char vert = vexControllerGet(Ch1);
+	char hori = vexControllerGet(Ch2);
 
-        if (vexControllerGet(Ch1)) {
-            vexMotorSet( MotorDriveL, vexControllerGet(Ch1) );
+        if (vert || hort) {
+            vexMotorSet( MotorDriveL, vert-hori );
+	    vexMotorSet( MotorDriveR, vert+hori );
         }
-        if (vexControllerGet(Ch2)) {
-            vexMotorSet( MotorDriveR, vexControllerGet(Ch2) );
-        }
+	else { vexMotorSet( MotorDriveL, 0 ); }
     
     }
 
