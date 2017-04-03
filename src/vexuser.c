@@ -101,9 +101,22 @@ vexUserSetup()
  */
 #define motor kVexMotor_10
 #define time  2500
+
+#define MotorDriveL   kVexMotor_1
+#define MotorDriveR   kVexMotor_10
+
 void vexUserInit()
 {
+    vexMotorSet( motor, 10 );
+    vexSleep( time );
+    vexMotorSet( motor, 127 );
   while (1) {
+
+    int thingToDo = 1;
+
+    
+    if (thingToDo == 0) {
+
     vexMotorSet(motor, 127);
     vexSleep( time );
     vexMotorSet(motor, 0);
@@ -112,6 +125,23 @@ void vexUserInit()
     vexSleep( time );
     vexMotorSet(motor, 0);
     vexSleep( time );
+    }
+
+    else if (thingToDo == 1) {
+
+        if (vexControllerGet(Ch1)) {
+            vexMotorSet( MotorDriveL, vexControllerGet(Ch1) );
+        }
+        if (vexControllerGet(Ch2)) {
+            vexMotorSet( MotorDriveR, vexControllerGet(Ch2) );
+        }
+    
+    }
+
+    else if (thingToDo == 2) {
+
+    }
+
   }
 }
 
@@ -129,7 +159,7 @@ vexAutonomous( void *arg )
     // Must call this
     vexTaskRegister("auton");
 
-    while(1)
+    while(0)
         {
         // Don't hog cpu
         //
@@ -170,10 +200,26 @@ vexOperator( void *arg )
 
 		// Tank drive
 		// left drive
-		vexMotorSet( MotorDriveL, vexControllerGet( Ch3 ) );
+		// vexMotorSet( MotorDriveL, vexControllerGet( Ch3 ) );
 
 		// right drive
-		vexMotorSet( MotorDriveR, vexControllerGet( Ch2 ) );
+		// vexMotorSet( MotorDriveR, vexControllerGet( Ch2 ) );
+
+
+		if (vexControllerGet(Ch1) > 0) {
+		    vexMotorSet( MotorDriveL, vexControllerGet(Ch1) );
+		}
+		else {
+		    vexMotorSet( MotorDriveL, 0 );
+		}
+
+		if (vexControllerGet(Ch2) > 0) {
+		    vexMotorSet( MotorDriveR, vexControllerGet(Ch2) );
+		}
+		else {
+		    vexMotorSet( MotorDriveR, 0 );
+		}
+		
 
 		// Don't hog cpu
 		vexSleep( 25 );
