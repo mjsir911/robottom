@@ -106,6 +106,7 @@ void BackAndForth(int motor) {
  */
 #define WHEEL_LEFT  kVexMotor_1
 #define WHEEL_RIGHT kVexMotor_10
+#define TRUE 1
 void vexUserInit()
 {
   signed char speed = -127;
