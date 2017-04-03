@@ -64,7 +64,7 @@ static  vexDigiCfg  dConfig[kVexDigital_Num] = {
 };
 
 static  vexMotorCfg mConfig[kVexMotorNum] = {
-        { kVexMotor_1,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_1,      kVexMotor393T,               kVexMotorReversed,       kVexSensorNone,        0 },
         { kVexMotor_2,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_3,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_4,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
@@ -72,7 +72,7 @@ static  vexMotorCfg mConfig[kVexMotorNum] = {
         { kVexMotor_6,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_7,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_8,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_9,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_9,      kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_10,     kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 }
 };
 
@@ -91,6 +91,11 @@ vexUserSetup()
 	vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
 }
 
+#define time  2500
+void BackAndForth(int motor) {
+}
+
+
 /*-----------------------------------------------------------------------------*/
 /** @brief      User initialize                                                */
 /*-----------------------------------------------------------------------------*/
@@ -99,18 +104,29 @@ vexUserSetup()
  *  been established with the master processor.
  *  Start other tasks and initialize user variables here
  */
-#define motor kVexMotor_10
-#define time  2500
+#define WHEEL_LEFT  kVexMotor_1
+#define WHEEL_RIGHT kVexMotor_10
 void vexUserInit()
 {
-  while (1) {
-    vexMotorSet(motor, 127);
+  signed char speed = -127;
+  while ( 1 ) {
+    speed ++;
+    vexMotorSet(WHEEL_LEFT, speed);
+    vexMotorSet(WHEEL_RIGHT, speed * -1);
+    vexSleep(100);
+  }
+  while ( 1 ) {
+    vexMotorSet(WHEEL_LEFT, 127);
+    vexMotorSet(WHEEL_RIGHT, 127);
     vexSleep( time );
-    vexMotorSet(motor, 0);
+    vexMotorSet(WHEEL_LEFT, 0);
+    vexMotorSet(WHEEL_RIGHT, 0);
     vexSleep( time );
-    vexMotorSet(motor, -127);
+    vexMotorSet(WHEEL_LEFT, -127);
+    vexMotorSet(WHEEL_RIGHT, -127);
     vexSleep( time );
-    vexMotorSet(motor, 0);
+    vexMotorSet(WHEEL_LEFT, 0);
+    vexMotorSet(WHEEL_RIGHT, 0);
     vexSleep( time );
   }
 }
