@@ -11,7 +11,7 @@
 void vexUserInit(void) {
   vexAudioPlaySound(256, 100, 100); // say im awake
 
-  while (TRUE) {
+  while ( true ) {
     pollMotion();
   }
 }
@@ -45,8 +45,7 @@ msg_t vexAutonomous( void *arg )
 /** @details
  *  This thread is started when the driver control period is started
  */
-msg_t
-vexOperator( void *arg )
+msg_t vexOperator( void *arg )
 {
     (void)arg;
 
