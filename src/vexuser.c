@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <stbool.h>
+#include <stdbool.h>
 
 #include "ch.h"          // needs for all ChibiOS programs
 #include "hal.h"         // hardware abstraction layer header
