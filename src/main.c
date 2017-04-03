@@ -47,31 +47,8 @@
 #include "hal.h"
 #include "chprintf.h"
 #include "vex.h"
+#include "shell.h"
 
-/*-----------------------------------------------------------------------------*/
-/* Command line related.                                                       */
-/*-----------------------------------------------------------------------------*/
-
-#define SHELL_WA_SIZE   THD_WA_SIZE(512)
-
-// Shell command
-static const ShellCommand commands[] = {
-  {"adc",     vexAdcDebug },
-  {"spi",     vexSpiDebug },
-  {"motor",   vexMotorDebug},
-  {"lcd",     vexLcdDebug},
-  {"enc",     vexEncoderDebug},
-  {"son",     vexSonarDebug},
-  {"ime",     vexIMEDebug},
-  {"test",    vexTestDebug},
-   {NULL, NULL}
-};
-
-// configuration for the shell
-static const ShellConfig shell_cfg1 = {
-  (vexStream *)SD_CONSOLE,
-   commands
-};
 
 /*-----------------------------------------------------------------------------*/
 //  Application entry point.											       */
@@ -110,17 +87,5 @@ int main(void)
     shellInit();
 
     // spin in loop monitoring the shell
-    while (TRUE)
-    	{
-	    if (!shelltp)
-	    	shelltp = shellCreate(&shell_cfg1, SHELL_WA_SIZE, NORMALPRIO);
-	    else
-	    if (chThdTerminated(shelltp))
-	    	{
-	        chThdRelease(shelltp);    /* Recovers memory of the previous shell.   */
-	        shelltp = NULL;           /* Triggers spawning of a new shell.        */
-	        }
-
-	    chThdSleepMilliseconds(50);
-    	}
+    shellMonitor(shelltp);
 }
