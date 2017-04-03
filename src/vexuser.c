@@ -8,6 +8,17 @@
 //Marco
 #include "motorconfig.c"
 
+/*-----------------------------------------------------------------------------*/
+/** @brief      User setup                                                     */
+/*-----------------------------------------------------------------------------*/
+/** @details
+ *  The digital and motor ports can (should) be configured here.
+ */
+void vexUserSetup() {
+    vexDigitalConfigure( dConfig, DIG_CONFIG_SIZE( dConfig ) );
+    vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
+}
+
 void vexUserInit(void) {
   vexAudioPlaySound(256, 100, 100); // say im awake
 
