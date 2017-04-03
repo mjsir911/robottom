@@ -33,9 +33,7 @@ static  vexMotorCfg mConfig[kVexMotorNum] = {
 /** @details
  *  The digital and motor ports can (should) be configured here.
  */
-void
-vexUserSetup()
-{
+void vexUserSetup() {
     vexDigitalConfigure( dConfig, DIG_CONFIG_SIZE( dConfig ) );
     vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
 }
