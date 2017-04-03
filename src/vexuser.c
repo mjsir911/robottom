@@ -42,10 +42,10 @@
 
 #include <stdlib.h>
 
-#include "ch.h"  		// needs for all ChibiOS programs
-#include "hal.h" 		// hardware abstraction layer header
+#include "ch.h"          // needs for all ChibiOS programs
+#include "hal.h"         // hardware abstraction layer header
 //#include "vexmotor.h"
-#include "vex.h"		// vex library header
+#include "vex.h"        // vex library header
 
 // Digi IO configuration
 static  vexDigiCfg  dConfig[kVexDigital_Num] = {
@@ -87,8 +87,8 @@ static  vexMotorCfg mConfig[kVexMotorNum] = {
 void
 vexUserSetup()
 {
-	vexDigitalConfigure( dConfig, DIG_CONFIG_SIZE( dConfig ) );
-	vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
+    vexDigitalConfigure( dConfig, DIG_CONFIG_SIZE( dConfig ) );
+    vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -101,51 +101,33 @@ vexUserSetup()
  */
 #define motor kVexMotor_10
 #define time  2500
+#define TRUE 1
 
 #define MotorDriveL   kVexMotor_1
 #define MotorDriveR   kVexMotor_10
 
+
+//Ch1 is vertical, Ch2 is horizontal probably
+#define VERT        vexControllerGet(Ch1)
+#define HORI        vexControllerGet(Ch2)
+
+
+void pollMotion(void) {
+  vexMotorSet( MotorDriveL, VERT-HORI );
+  vexMotorSet( MotorDriveR, VERT+HORI );
+}
+
 void vexUserInit()
 {
-    vexMotorSet( motor, 10 );
-    vexSleep( time );
-    vexMotorSet( motor, 127 );
-  while (1) {
+  vexMotorSet( motor, 10 );
+  vexSleep( time );
+  vexMotorSet( motor, 127 );
 
-    int thingToDo = 1;
-
-    
-    if (thingToDo == 0) {
-
-    vexMotorSet(motor, 127);
-    vexSleep( time );
-    vexMotorSet(motor, 0);
-    vexSleep( time );
-    vexMotorSet(motor, -127);
-    vexSleep( time );
-    vexMotorSet(motor, 0);
-    vexSleep( time );
-    }
-
-    else if (thingToDo == 1) {
-	
-	char vert = vexControllerGet(Ch1);
-	char hori = vexControllerGet(Ch2);
-
-        if (vert || hori) {
-            vexMotorSet( MotorDriveL, vert-hori );
-	    vexMotorSet( MotorDriveR, vert+hori );
-        }
-	else { vexMotorSet( MotorDriveL, 0 ); }
-    
-    }
-
-    else if (thingToDo == 2) {
-
-    }
-
+  while (TRUE) {
+    pollMotion();
   }
 }
+
 
 /*-----------------------------------------------------------------------------*/
 /** @brief      Autonomous                                                     */
@@ -183,51 +165,51 @@ vexAutonomous( void *arg )
 msg_t
 vexOperator( void *arg )
 {
-	int16_t		blink = 0;
+    int16_t        blink = 0;
 
-	(void)arg;
+    (void)arg;
 
-	// Must call this
-	vexTaskRegister("operator");
+    // Must call this
+    vexTaskRegister("operator");
 
-	// Run until asked to terminate
-	while(!chThdShouldTerminate())
-		{
-		// flash led/digi out
-		vexDigitalPinSet( kVexDigital_1, (blink++ >> 3) & 1);
+    // Run until asked to terminate
+    while(!chThdShouldTerminate())
+        {
+        // flash led/digi out
+        vexDigitalPinSet( kVexDigital_1, (blink++ >> 3) & 1);
 
-		// status on LCD of encoder and sonar
-		vexLcdPrintf( VEX_LCD_DISPLAY_2, VEX_LCD_LINE_1, "%4.2fV   %8.1f", vexSpiGetMainBattery() / 1000.0, chTimeNow() / 1000.0 );
-		vexLcdPrintf( VEX_LCD_DISPLAY_2, VEX_LCD_LINE_2, "L %3d R %3d", vexMotorGet( MotorDriveL ), vexMotorGet( MotorDriveR ) );
+        // status on LCD of encoder and sonar
+        vexLcdPrintf( VEX_LCD_DISPLAY_2, VEX_LCD_LINE_1, "%4.2fV   %8.1f", vexSpiGetMainBattery() / 1000.0, chTimeNow() / 1000.0 );
+        vexLcdPrintf( VEX_LCD_DISPLAY_2, VEX_LCD_LINE_2, "L %3d R %3d", vexMotorGet( MotorDriveL ), vexMotorGet( MotorDriveR ) );
 
-		// Tank drive
-		// left drive
-		// vexMotorSet( MotorDriveL, vexControllerGet( Ch3 ) );
+        // Tank drive
+        // left drive
+        // vexMotorSet( MotorDriveL, vexControllerGet( Ch3 ) );
 
-		// right drive
-		// vexMotorSet( MotorDriveR, vexControllerGet( Ch2 ) );
+        // right drive
+        // vexMotorSet( MotorDriveR, vexControllerGet( Ch2 ) );
 
 
-		if (vexControllerGet(Ch1) > 0) {
-		    vexMotorSet( MotorDriveL, vexControllerGet(Ch1) );
-		}
-		else {
-		    vexMotorSet( MotorDriveL, 0 );
-		}
+        if (vexControllerGet(Ch1) > 0) {
+            vexMotorSet( MotorDriveL, vexControllerGet(Ch1) );
+        }
+        else {
+            vexMotorSet( MotorDriveL, 0 );
+        }
 
-		if (vexControllerGet(Ch2) > 0) {
-		    vexMotorSet( MotorDriveR, vexControllerGet(Ch2) );
-		}
-		else {
-		    vexMotorSet( MotorDriveR, 0 );
-		}
-		
+        if (vexControllerGet(Ch2) > 0) {
+            vexMotorSet( MotorDriveR, vexControllerGet(Ch2) );
+        }
+        else {
+            vexMotorSet( MotorDriveR, 0 );
+        }
+        
 
-		// Don't hog cpu
-		vexSleep( 25 );
-		}
+        // Don't hog cpu
+        vexSleep( 25 );
+        }
 
-	return (msg_t)0;
+    return (msg_t)0;
 }
 
 
