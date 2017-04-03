@@ -132,7 +132,7 @@ void vexUserInit()
 	char vert = vexControllerGet(Ch1);
 	char hori = vexControllerGet(Ch2);
 
-        if (vert || hort) {
+        if (vert || hori) {
             vexMotorSet( MotorDriveL, vert-hori );
 	    vexMotorSet( MotorDriveR, vert+hori );
         }
