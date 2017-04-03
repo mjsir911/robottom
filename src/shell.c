@@ -1,5 +1,6 @@
 #include "chprintf.h"
-#include <vexcompat.h>
+#include "vex.h"
+
 // Custom commands go here
 void marcoTest(vexStream *chp, int argc, char *argv[]) {
   (void)argc; // gotta stop dem errors
@@ -30,7 +31,7 @@ static const ShellCommand commands[] = {
 // configuration for the shell
 static const ShellConfig shell_cfg1 = {
   (vexStream *)SD_CONSOLE,
-   commands
+  commands
 };
 
 void shellMonitor( Thread *shelltp ) {
