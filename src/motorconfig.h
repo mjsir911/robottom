@@ -29,7 +29,7 @@ static  vexMotorCfg mConfig[kVexMotorNum] = {
 
 #define WHEEL_LEFT  kVexMotor_1
 #define WHEEL_RIGHT kVexMotor_10
-void wheelMotion(unsigned char left, unsigned char right);
+void wheelMotion(signed char left, signed char right);
 #define VERT vexControllerGet(Ch1)
 #define HORI vexControllerGet(Ch2)
 void pollMotion(void);

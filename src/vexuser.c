@@ -34,29 +34,10 @@ void vexUserSetup() {
 }
   
   
-#define motor kVexMotor_10
 #define time  2500
 
-#define MotorDriveL   kVexMotor_1
-#define MotorDriveR   kVexMotor_10
 
 
-//Ch1 is vertical, Ch2 is horizontal probably
-#define VERT        vexControllerGet(Ch1)
-#define HORI        vexControllerGet(Ch2)
-
-
-void safeMotorSet( tVexMotor m, int c ) {
-  if       ( c > 127  )  { vexMotorSet( m, 127  ); }
-  else if  ( c < -127 )  { vexMotorSet( m, -127 ); }
-  else                   { vexMotorSet( m, c    ); }
-}
-
-
-void pollMotion(void) {
-  safeMotorSet( MotorDriveL, VERT-HORI );
-  safeMotorSet( MotorDriveR, VERT+HORI );
-}
 
 void buttonTestThingy(void) {
     if ( vexControllerGet(Btn5) ) {
