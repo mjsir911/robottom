@@ -29,8 +29,11 @@ void vexUserSetup() {
  *  Start other tasks and initialize user variables here
  */
  
-  void vexUserInit(void) {
+void vexUserInit(void) {
   vexAudioPlaySound(256, 100, 100); // say I'm awake
+  while (TRUE) {
+    pollMotion();
+  }
 }
   
   
