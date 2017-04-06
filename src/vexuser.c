@@ -19,12 +19,53 @@ void vexUserSetup() {
     vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
 }
 
-void vexUserInit(void) {
-  vexAudioPlaySound(256, 100, 100); // say im awake
 
-  while ( true ) {
-    pollMotion();
-  }
+/*-----------------------------------------------------------------------------*/
+/** @brief      User initialize                                                */
+/*-----------------------------------------------------------------------------*/
+/** @details
+ *  This function is called after all setup is complete and communication has
+ *  been established with the master processor.
+ *  Start other tasks and initialize user variables here
+ */
+ 
+  void vexUserInit(void) {
+  vexAudioPlaySound(256, 100, 100); // say I'm awake
+}
+  
+  
+#define motor kVexMotor_10
+#define time  2500
+
+#define MotorDriveL   kVexMotor_1
+#define MotorDriveR   kVexMotor_10
+
+
+//Ch1 is vertical, Ch2 is horizontal probably
+#define VERT        vexControllerGet(Ch1)
+#define HORI        vexControllerGet(Ch2)
+
+
+void safeMotorSet( tVexMotor m, int c ) {
+  if       ( c > 127  )  { vexMotorSet( m, 127  ); }
+  else if  ( c < -127 )  { vexMotorSet( m, -127 ); }
+  else                   { vexMotorSet( m, c    ); }
+}
+
+
+void pollMotion(void) {
+  safeMotorSet( MotorDriveL, VERT-HORI );
+  safeMotorSet( MotorDriveR, VERT+HORI );
+}
+
+void buttonTestThingy(void) {
+    if ( vexControllerGet(Btn5) ) {
+      int i = 0;
+      for (i = 0; i < 128; i++) {
+        safeMotorSet(MotorDriveL, i);
+        safeMotorSet(MotorDriveR, 127-i);
+      }
+    }
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -50,6 +91,7 @@ msg_t vexAutonomous( void *arg )
     return (msg_t)0;
 }
 
+
 /*-----------------------------------------------------------------------------*/
 /** @brief      Driver control                                                 */
 /*-----------------------------------------------------------------------------*/
@@ -64,8 +106,42 @@ msg_t vexOperator( void *arg )
     vexTaskRegister("operator");
 
     // Run until asked to terminate
-    while( !chThdShouldTerminate() ) {
+
+    while (!chThdShouldTerminate()) {
+        
+        pollMotion();
+
+        // Don't hog cpu
+        vexSleep( 25 );
+        
         }
 
+        if (Btn5) { vexMotorSet( MotorDriveR, 63); }
+        if (Btn6) { vexMotorSet( MotorDriveL, 63); }
+        
+
     return (msg_t)0;
+}
+
+
+/*-----------------------------------------------------------------------------*/
+/** @brief      Manual mode control                                            */
+/*-----------------------------------------------------------------------------*/
+static WORKING_AREA(waModeControl,64);
+msg_t modeControl( void *arg ) {
+  (void)arg;
+  vexTaskRegister("modeControl");
+
+  while (TRUE) { 
+    if (vexControllerGet(Ch3) > 0) {
+      vexControllerCompetitionStateSet(1,1);
+    }
+    else if (vexControllerGet(Ch3) < 0) {
+      vexControllerCompetitionStateSet(0,1);
+    }
+    vexSleep(25);
+  }
+
+  return (msg_t)0;
+
 }
