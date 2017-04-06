@@ -138,9 +138,8 @@ void vexUserInit()
   vexMotorSet( motor, 10 );
   vexSleep( time );
   vexMotorSet( motor, 127 );
-
+  vexSleep( time );
   while (TRUE) {
-    pollMotion();
   }
 }
 
@@ -171,6 +170,7 @@ vexAutonomous( void *arg )
 
 #define MotorDriveL     kVexMotor_1
 #define MotorDriveR     kVexMotor_10
+
 
 /*-----------------------------------------------------------------------------*/
 /** @brief      Driver control                                                 */
@@ -220,6 +220,7 @@ vexOperator( void *arg )
             vexMotorSet( MotorDriveR, 0 );
         }
         
+        pollMotion();
 
         // Don't hog cpu
         vexSleep( 25 );
@@ -230,3 +231,25 @@ vexOperator( void *arg )
 
 
 
+/*-----------------------------------------------------------------------------*/
+/** @brief      Manual mode control                                            */
+/*-----------------------------------------------------------------------------*/
+
+msg_t
+modeControl( void *arg ) {
+  (void)arg;
+  vexTaskRegister("modeControl");
+
+  while (TRUE) { 
+    if (vexControllerGet(Ch3) > 0) {
+      vexControllerCompetitionStateSet(1,1);
+    }
+    else if (vexControllerGet(Ch3) < 0) {
+      vexControllerCompetitionStateSet(0,1);
+    }
+    vexSleep(25);
+  }
+
+  return (msg_t)0;
+
+}
