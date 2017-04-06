@@ -223,9 +223,8 @@ vexOperator( void *arg )
 /*-----------------------------------------------------------------------------*/
 /** @brief      Manual mode control                                            */
 /*-----------------------------------------------------------------------------*/
-
-msg_t
-modeControl( void *arg ) {
+static WORKING_AREA(waModeControl,64);
+msg_t modeControl( void *arg ) {
   (void)arg;
   vexTaskRegister("modeControl");
 
