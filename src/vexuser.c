@@ -101,7 +101,6 @@ vexUserSetup()
  */
 #define motor kVexMotor_10
 #define time  2500
-#define TRUE 1
 
 #define MotorDriveL   kVexMotor_1
 #define MotorDriveR   kVexMotor_10
@@ -112,9 +111,26 @@ vexUserSetup()
 #define HORI        vexControllerGet(Ch2)
 
 
+void safeMotorSet( tVexMotor m, int c ) {
+  if       ( c > 127  )  { vexMotorSet( m, 127  ); }
+  else if  ( c < -127 )  { vexMotorSet( m, -127 ); }
+  else                   { vexMotorSet( m, c    ); }
+}
+
+
 void pollMotion(void) {
-  vexMotorSet( MotorDriveL, VERT-HORI );
-  vexMotorSet( MotorDriveR, VERT+HORI );
+  safeMotorSet( MotorDriveL, VERT-HORI );
+  safeMotorSet( MotorDriveR, VERT+HORI );
+}
+
+void buttonTestThingy(void) {
+    if ( vexControllerGet(btns[1]) ) {
+      int i = 0;
+      for (i = 0; i < 128; i++) {
+        safeMotorSet(MotorDriveL, i);
+        safeMotorSet(MotorDriveR, 127-i);
+      }
+    }
 }
 
 void vexUserInit()
