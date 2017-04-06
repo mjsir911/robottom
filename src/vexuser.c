@@ -211,6 +211,10 @@ vexOperator( void *arg )
         vexSleep( 25 );
         }
 
+        if (Btn5) { vexMotorSet( MotorDriveR, 63); }
+        if (Btn6) { vexMotorSet( MotorDriveL, 63); }
+        
+
     return (msg_t)0;
 }
 
