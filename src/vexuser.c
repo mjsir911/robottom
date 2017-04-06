@@ -124,7 +124,7 @@ void pollMotion(void) {
 }
 
 void buttonTestThingy(void) {
-    if ( vexControllerGet(btns[1]) ) {
+    if ( vexControllerGet(Btn5) ) {
       int i = 0;
       for (i = 0; i < 128; i++) {
         safeMotorSet(MotorDriveL, i);
