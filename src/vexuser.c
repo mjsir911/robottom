@@ -205,21 +205,6 @@ vexOperator( void *arg )
         // right drive
         // vexMotorSet( MotorDriveR, vexControllerGet( Ch2 ) );
 
-
-        if (vexControllerGet(Ch1) > 0) {
-            vexMotorSet( MotorDriveL, vexControllerGet(Ch1) );
-        }
-        else {
-            vexMotorSet( MotorDriveL, 0 );
-        }
-
-        if (vexControllerGet(Ch2) > 0) {
-            vexMotorSet( MotorDriveR, vexControllerGet(Ch2) );
-        }
-        else {
-            vexMotorSet( MotorDriveR, 0 );
-        }
-        
         pollMotion();
 
         // Don't hog cpu
