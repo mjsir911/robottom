@@ -12,11 +12,21 @@ void pollMotion(void) {
   short left  = vert - hori;
   short right = vert + hori;
 
-  if   (left >   127) {left  =  127;}
-  elif (left <  -127) {left  = -127;}
+  if      (left >   127) {left  =  127;}
+  else if (left <  -127) {left  = -127;}
 
-  if   (right >  127) {right =  127;}
-  elif (right < -127) {right = -127;}
+  if      (right >  127) {right =  127;}
+  else if (right < -127) {right = -127;}
   
   wheelMotion(left, right);
+}
+
+void buttonTestThingy(void) {
+    if ( vexControllerGet(Btn5) ) {
+      int i = 0;
+      for (i = 0; i < 128; i++) {
+        wheelMotion(i, 127-i);
+        vexSleep(20);
+      }
+    }
 }

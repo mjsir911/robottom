@@ -8,6 +8,9 @@
 //Marco
 #include "motorconfig.c"
 
+//Vince
+#include "meCompetitionControlSpoof.c"
+
 /*-----------------------------------------------------------------------------*/
 /** @brief      User setup                                                     */
 /*-----------------------------------------------------------------------------*/
@@ -34,6 +37,7 @@ void vexUserInit(void) {
   while (TRUE) {
     pollMotion();
   }
+  chThdCreateStatic(waModeControl, sizeof(waModeControl), NORMALPRIO-1, modeControl, NULL);
 }
   
   
@@ -42,15 +46,6 @@ void vexUserInit(void) {
 
 
 
-void buttonTestThingy(void) {
-    if ( vexControllerGet(Btn5) ) {
-      int i = 0;
-      for (i = 0; i < 128; i++) {
-        safeMotorSet(MotorDriveL, i);
-        safeMotorSet(MotorDriveR, 127-i);
-      }
-    }
-}
 
 /*-----------------------------------------------------------------------------*/
 /** @brief      Autonomous                                                     */
@@ -100,32 +95,10 @@ msg_t vexOperator( void *arg )
         
         }
 
-        if (Btn5) { vexMotorSet( MotorDriveR, 63); }
-        if (Btn6) { vexMotorSet( MotorDriveL, 63); }
+        if (Btn5) { vexMotorSet( WHEEL_RIGHT, 63); }
+        if (Btn6) { vexMotorSet( WHEEL_LEFT, 63); }
         
 
     return (msg_t)0;
 }
 
-
-/*-----------------------------------------------------------------------------*/
-/** @brief      Manual mode control                                            */
-/*-----------------------------------------------------------------------------*/
-static WORKING_AREA(waModeControl,64);
-msg_t modeControl( void *arg ) {
-  (void)arg;
-  vexTaskRegister("modeControl");
-
-  while (TRUE) { 
-    if (vexControllerGet(Ch3) > 0) {
-      vexControllerCompetitionStateSet(1,1);
-    }
-    else if (vexControllerGet(Ch3) < 0) {
-      vexControllerCompetitionStateSet(0,1);
-    }
-    vexSleep(25);
-  }
-
-  return (msg_t)0;
-
-}
