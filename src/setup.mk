@@ -21,7 +21,13 @@ VEXUSERINC = src/
 #USERDEPS = $(VEXUSERINC)/*.c
 #USERDEPS = $(src/*.c)
 #USERDEPS := $(foo:.o=.c)
-#USERDEPS := $(wildcard src/*.c)
+#USERDEPS := $(wildcard src/*.o)
+#USERDEPS := $(USERDEPS:.o=.c)
 #USERDEPS -= main.c
-USERDEPS = src/motorconfig.c
-USERDEPS += src/myshell.c
+#USERDEPS = src/motorconfig.c
+#USERDEPS += src/myshell.c
+#USERDEPS := $(wildcards src/*.c)
+USERDEPS := $(wildcard src/*.c)
+
+#test:
+	#echo $(USERDEPS)
