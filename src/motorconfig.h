@@ -4,8 +4,6 @@
 extern vexDigiCfg  dConfig[kVexDigital_Num];
 extern vexMotorCfg mConfig[kVexMotorNum];
 
-void configMotors(void);
-
 #define WHEEL_LEFT  kVexMotor_1
 #define WHEEL_RIGHT kVexMotor_10
 void wheelMotion(signed char left, signed char right);
