@@ -6,7 +6,7 @@
 #include "vex.h"        // vex library header
 
 //Marco
-#include "motorconfig.c"
+#include "motorconfig.h"
 
 //Vince
 #include "meCompetitionControlSpoof.c"

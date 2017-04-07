@@ -1,5 +1,5 @@
 #include "motorconfig.h"
-
+#include "vex.h"
 void wheelMotion(signed char left, signed char right) {
   vexMotorSet(WHEEL_RIGHT, right);
   vexMotorSet(WHEEL_LEFT , left);

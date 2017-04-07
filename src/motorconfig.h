@@ -1,3 +1,6 @@
+#include "hal.h"         // hardware abstraction layer header
+#include "vex.h"
+
 // Digi IO configuration
 static  vexDigiCfg  dConfig[kVexDigital_Num] = {
         { kVexDigital_1,    kVexSensorDigitalOutput, kVexConfigOutput,      0 },

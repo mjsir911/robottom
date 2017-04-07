@@ -46,7 +46,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "vex.h"
-#include "shell.c"
+#include "myshell.h"
 
 
 /*-----------------------------------------------------------------------------*/
