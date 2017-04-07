@@ -3,7 +3,7 @@
 /*-----------------------------------------------------------------------------*/
 /** @brief      Manual mode control                                            */
 /*-----------------------------------------------------------------------------*/
-static WORKING_AREA(waModeControl,64);
+WORKING_AREA(waModeControl,64);
 msg_t modeControl( void *arg ) {
   (void)arg;
   vexTaskRegister("modeControl");
