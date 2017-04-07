@@ -242,6 +242,7 @@ ifeq ($(USE_FWLIB),yes)
   USE_OPT += -DUSE_STDPERIPH_DRIVER
 endif
 
+SZ   = $(TRGT)size
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/rules.mk
 
 flash: all
