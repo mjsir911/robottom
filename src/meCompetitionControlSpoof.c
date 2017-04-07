@@ -1,9 +1,10 @@
+#include "hal.h"
 #include "vex.h"
 
 /*-----------------------------------------------------------------------------*/
 /** @brief      Manual mode control                                            */
 /*-----------------------------------------------------------------------------*/
-WORKING_AREA(waModeControl,64);
+extern WORKING_AREA(waModeControl,64);
 msg_t modeControl( void *arg ) {
   (void)arg;
   vexTaskRegister("modeControl");
