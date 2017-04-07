@@ -1,12 +1,6 @@
-#include "chprintf.h"
 #include "vex.h"
 
-// Custom commands go here
-void marcoTest(vexStream *chp, int argc, char *argv[]) {
-  (void)argc; // gotta stop dem errors
-  (void)argv;
-  chprintf(chp, "hello world\r\n");
-}
+void marcoTest(vexStream *chp, int argc, char *argv[]);
 
 /*-----------------------------------------------------------------------------*/
 /* Command line related.                                                       */
@@ -34,15 +28,4 @@ static const ShellConfig shell_cfg1 = {
   commands
 };
 
-void shellMonitor( Thread *shelltp ) {
-  while ( true ) {
-    if ( !shelltp )
-      shelltp = shellCreate(&shell_cfg1, SHELL_WA_SIZE, NORMALPRIO);
-    else
-      if ( chThdTerminated(shelltp) ) {
-        chThdRelease(shelltp);    /* Recovers memory of the previous shell.   */
-        shelltp = NULL;           /* Triggers spawning of a new shell.        */
-      }
-    chThdSleepMilliseconds(50);
-  }
-}
+void shellMonitor(Thread *shelltp);
