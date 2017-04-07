@@ -1,8 +1,8 @@
 #include "hal.h"         // hardware abstraction layer header
 #include "vex.h"
 
-static vexDigiCfg  dConfig[kVexDigital_Num]__attribute__((unused));
-static vexMotorCfg mConfig[kVexMotorNum]__attribute__((unused)); // WHAT THE EVERLIVING FUCK
+extern vexDigiCfg  dConfig[kVexDigital_Num];
+extern vexMotorCfg mConfig[kVexMotorNum];
 
 void configMotors(void);
 

@@ -2,7 +2,8 @@
 #include "vex.h"
 
 // Digi IO configuration
-static vexDigiCfg  dConfig[kVexDigital_Num] = {
+extern vexDigiCfg dConfig[kVexDigital_Num];
+vexDigiCfg dConfig[kVexDigital_Num] = {
         { kVexDigital_1,    kVexSensorDigitalOutput, kVexConfigOutput,      0 },
         { kVexDigital_2,    kVexSensorDigitalOutput, kVexConfigOutput,      0 },
         { kVexDigital_3,    kVexSensorDigitalInput,  kVexConfigInput,       0 },
@@ -17,7 +18,8 @@ static vexDigiCfg  dConfig[kVexDigital_Num] = {
         { kVexDigital_12,   kVexSensorDigitalInput,  kVexConfigInput,       0 }
 };
 
-static vexMotorCfg mConfig[kVexMotorNum] = {
+extern vexMotorCfg mConfig[kVexMotorNum];
+vexMotorCfg mConfig[kVexMotorNum] = {
         { kVexMotor_1,      kVexMotor393T,               kVexMotorReversed,       kVexSensorNone,        0 },
         { kVexMotor_2,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_3,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
