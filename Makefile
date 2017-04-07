@@ -91,6 +91,11 @@ endif
 # Define linker script file here
 LDSCRIPT= $(CONVEX)/ld/STM32F103xD.ld
 
+# Marco
+ifneq ( $(USERDEPS), )
+    USERDEPS := $(filter-out $(INCDIR)/main.c, $(USERDEPS))
+    USERDEPS := $(filter-out $(VEXUSERSRC), $(USERDEPS))
+endif
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -108,6 +113,7 @@ CSRC = $(PORTSRC) \
        $(VEXFWSRC) \
        $(VEXOPTSRC) \
        $(VEXUSERSRC) \
+       $(USERDEPS) \
        main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
