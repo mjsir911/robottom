@@ -15,19 +15,8 @@ CONVEX_OPT  = yes
 VEXUSERSRC = src/vexuser.c
 
 # Uncomment and add/modify user include files
-VEXUSERINC = src/
+VEXUSERINC = src/ src/conf/
 
 # MARCO - User dependency files(source files)
-#USERDEPS = $(VEXUSERINC)/*.c
-#USERDEPS = $(src/*.c)
-#USERDEPS := $(foo:.o=.c)
-#USERDEPS := $(wildcard src/*.o)
-#USERDEPS := $(USERDEPS:.o=.c)
-#USERDEPS -= main.c
-#USERDEPS = src/motorconfig.c
-#USERDEPS += src/myshell.c
-#USERDEPS := $(wildcards src/*.c)
-USERDEPS := $(wildcard src/*.c)
-
-#test:
-	#echo $(USERDEPS)
+USERDEPS := $(wildcard src/*.h)
+USERDEPS := $(USERDEPS:.h=.c)
