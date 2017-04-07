@@ -11,6 +11,14 @@
 //Vince
 #include "meCompetitionControlSpoof.c"
 
+void identifyOperator(int time) {
+      vexDigitalPinSet(kVexDigital_1, kVexDigitalHigh);
+      vexSleep(time);
+      vexDigitalPinSet(kVexDigital_1, kVexDigitalLow);
+      vexSleep(time);
+}
+
+
 /*-----------------------------------------------------------------------------*/
 /** @brief      User setup                                                     */
 /*-----------------------------------------------------------------------------*/
@@ -34,18 +42,10 @@ void vexUserSetup() {
  
 void vexUserInit(void) {
   vexAudioPlaySound(256, 100, 100); // say I'm awake
-  while (TRUE) {
-    pollMotion();
-  }
   chThdCreateStatic(waModeControl, sizeof(waModeControl), NORMALPRIO-1, modeControl, NULL);
 }
   
   
-#define time  2500
-
-
-
-
 
 /*-----------------------------------------------------------------------------*/
 /** @brief      Autonomous                                                     */
@@ -59,8 +59,8 @@ msg_t vexAutonomous( void *arg ) {
     // Must call this
     vexTaskRegister("auton");
 
-    while(0)
-        {
+    while( TRUE ) {
+        identifyOperator(25);
         // Don't hog cpu
         //
         vexSleep( 25 );
@@ -83,7 +83,6 @@ msg_t vexOperator( void *arg ) {
     vexTaskRegister("operator");
 
     // Run until asked to terminate
-
     while (!chThdShouldTerminate()) {
         
         pollMotion();
@@ -92,10 +91,6 @@ msg_t vexOperator( void *arg ) {
         vexSleep( 25 );
         
         }
-
-        if (Btn5) { vexMotorSet( WHEEL_RIGHT, 63); }
-        if (Btn6) { vexMotorSet( WHEEL_LEFT, 63); }
-        
 
     return (msg_t)0;
 }
