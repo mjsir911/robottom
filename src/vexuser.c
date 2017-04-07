@@ -19,7 +19,7 @@
  */
 void vexUserSetup() {
     vexDigitalConfigure( dConfig, DIG_CONFIG_SIZE( dConfig ) );
-    configMotors();
+    vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
 }
 
 

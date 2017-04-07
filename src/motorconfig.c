@@ -17,7 +17,7 @@ static vexDigiCfg  dConfig[kVexDigital_Num] = {
         { kVexDigital_12,   kVexSensorDigitalInput,  kVexConfigInput,       0 }
 };
 
-vexMotorCfg mConfig[kVexMotorNum] = {
+static vexMotorCfg mConfig[kVexMotorNum] = {
         { kVexMotor_1,      kVexMotor393T,               kVexMotorReversed,       kVexSensorNone,        0 },
         { kVexMotor_2,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_3,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
@@ -29,10 +29,6 @@ vexMotorCfg mConfig[kVexMotorNum] = {
         { kVexMotor_9,      kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_10,     kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 }
 };
-
-void configMotors(void) {
-  vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
-}
 
 void wheelMotion(signed char left, signed char right) {
   vexMotorSet(WHEEL_RIGHT, right);
