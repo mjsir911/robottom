@@ -19,7 +19,7 @@
  */
 void vexUserSetup() {
     vexDigitalConfigure( dConfig, DIG_CONFIG_SIZE( dConfig ) );
-    vexMotorConfigure( mConfig, MOT_CONFIG_SIZE( mConfig ) );
+    configMotors();
 }
 
 
@@ -53,8 +53,7 @@ void vexUserInit(void) {
 /** @details
  *  This thread is started when the autonomous period is started
  */
-msg_t vexAutonomous( void *arg )
-{
+msg_t vexAutonomous( void *arg ) {
     (void)arg;
 
     // Must call this
@@ -77,8 +76,7 @@ msg_t vexAutonomous( void *arg )
 /** @details
  *  This thread is started when the driver control period is started
  */
-msg_t vexOperator( void *arg )
-{
+msg_t vexOperator( void *arg ) {
     (void)arg;
 
     // Must call this
