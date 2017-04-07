@@ -9,7 +9,7 @@
 #include "motorconfig.h"
 
 //Vince
-#include "meCompetitionControlSpoof.h"
+#include "meCompetitionControlSpoof.c"
 
 /*-----------------------------------------------------------------------------*/
 /** @brief      User setup                                                     */
