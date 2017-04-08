@@ -38,18 +38,21 @@ void wheelMotion(signed char left, signed char right) {
   
 }
 
+static signed char normalizeMotion(short motorspeed) {
+  if      (motorspeed >   127) {motorspeed  =  127;}
+  else if (motorspeed <  -127) {motorspeed  = -127;}
+  return motorspeed;
+}
+
 void pollMotion(void) {
   short vert = VERT;  
   short hori = HORI;  
-  short left  = vert - hori;
-  short right = vert + hori;
+  short left  = vert + hori;
+  short right = vert - hori;
 
-  if      (left >   127) {left  =  127;}
-  else if (left <  -127) {left  = -127;}
+  left = normalizeMotion(left);
+  right = normalizeMotion(right);
 
-  if      (right >  127) {right =  127;}
-  else if (right < -127) {right = -127;}
-  
   wheelMotion(left, right);
 }
 
