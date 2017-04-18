@@ -9,16 +9,18 @@ void wheelMotion(signed char left, signed char right) {
 void pollMotion(void) {
   short vert = VERT;  
   short hori = HORI;  
-  short left  = vert - hori;
-  short right = vert + hori;
+  short left  = vert + hori;
+  short right = vert - hori;
 
   if      (left >   127) {left  =  127;}
   else if (left <  -127) {left  = -127;}
+  if      ((left < 10) && (left > -10)) {left  =    0;}
 
   if      (right >  127) {right =  127;}
   else if (right < -127) {right = -127;}
-  
-  wheelMotion(left, right);
+  if      ((right < 10) && (right > -10)) {right = 0;}
+
+  wheelMotion(left, -right);
 }
 
 void buttonTestThingy(void) {

@@ -33,7 +33,7 @@ void vexUserSetup() {
  */
  
 void vexUserInit(void) {
-  vexAudioPlaySound(256, 100, 100); // say I'm awake
+  vexAudioPlaySound(256, 1000, 100); // say I'm awake
   while (TRUE) {
     pollMotion();
   }
@@ -42,9 +42,6 @@ void vexUserInit(void) {
   
   
 #define time  2500
-
-
-
 
 
 /*-----------------------------------------------------------------------------*/
