@@ -93,7 +93,7 @@ msg_t vexOperator( void *arg ) {
           turn(90);
         }
         if (vexControllerGet(Btn6)) {
-          autoTurn(-90);
+          turn(-90);
         }
 
 

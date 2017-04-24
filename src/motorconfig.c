@@ -111,10 +111,10 @@ void turn(signed int degrees) {
   if ( degrees > 0 ) {
     turn = -127;
   } else if ( degrees < 0 ) {
-    degrees *= -1
-    turn = 127
+    degrees *= -1;
+    turn = 127;
   } else {
-    turn = 0
+    turn = 0;
   }
   wheelMotion(turn, turn);
   vexSleep(DEG2SEC(degrees));
@@ -123,5 +123,5 @@ void turn(signed int degrees) {
 
 void runAutonomous(void) {
   //autoMove(25);
-  autoTurn(90);
+  turn(90);
 }
