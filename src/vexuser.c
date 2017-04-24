@@ -6,10 +6,18 @@
 #include "vex.h"        // vex library header
 
 //Marco
-#include "motorconfig.c"
+#include "motorconfig.h"
 
 //Vince
 #include "meCompetitionControlSpoof.c"
+
+void identifyOperator(int time) {
+      vexDigitalPinSet(kVexDigital_1, kVexDigitalHigh);
+      vexSleep(time);
+      vexDigitalPinSet(kVexDigital_1, kVexDigitalLow);
+      vexSleep(time);
+}
+
 
 /*-----------------------------------------------------------------------------*/
 /** @brief      User setup                                                     */
@@ -33,16 +41,10 @@ void vexUserSetup() {
  */
  
 void vexUserInit(void) {
-  vexAudioPlaySound(256, 1000, 100); // say I'm awake
-  while (TRUE) {
-    pollMotion();
-  }
+  vexAudioPlaySound(256, 100, 100); // say I'm awake
   chThdCreateStatic(waModeControl, sizeof(waModeControl), NORMALPRIO-1, modeControl, NULL);
 }
   
-  
-#define time  2500
-
 
 /*-----------------------------------------------------------------------------*/
 /** @brief      Autonomous                                                     */
@@ -50,15 +52,17 @@ void vexUserInit(void) {
 /** @details
  *  This thread is started when the autonomous period is started
  */
-msg_t vexAutonomous( void *arg )
-{
+msg_t vexAutonomous( void *arg ) {
     (void)arg;
 
     // Must call this
     vexTaskRegister("auton");
 
-    while(0)
-        {
+    while( TRUE ) {
+        identifyOperator(25);
+
+        runAutonomous();
+
         // Don't hog cpu
         //
         vexSleep( 25 );
@@ -74,27 +78,30 @@ msg_t vexAutonomous( void *arg )
 /** @details
  *  This thread is started when the driver control period is started
  */
-msg_t vexOperator( void *arg )
-{
+msg_t vexOperator( void *arg ) {
     (void)arg;
 
     // Must call this
     vexTaskRegister("operator");
 
     // Run until asked to terminate
-
     while (!chThdShouldTerminate()) {
         
         pollMotion();
+
+        if (vexControllerGet(Btn5)) {
+          turn(90);
+        }
+        if (vexControllerGet(Btn6)) {
+          autoTurn(-90);
+        }
+
+
 
         // Don't hog cpu
         vexSleep( 25 );
         
         }
-
-        if (Btn5) { vexMotorSet( WHEEL_RIGHT, 63); }
-        if (Btn6) { vexMotorSet( WHEEL_LEFT, 63); }
-        
 
     return (msg_t)0;
 }
