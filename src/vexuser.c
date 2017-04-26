@@ -88,14 +88,13 @@ msg_t vexOperator( void *arg ) {
     while (!chThdShouldTerminate()) {
         
         pollMotion();
+        
+        triggerButtons();
 
-        if (vexControllerGet(Btn5)) {
-          turn(90);
-        }
-        if (vexControllerGet(Btn6)) {
-          turn(-90);
-        }
-
+        
+        if      (vexControllerGet(Btn7)) {vexMotorSet(kVexMotor_2, 32);}
+        else if (vexControllerGet(Btn8)) {vexMotorSet(kVexMotor_2,-32);}
+        else {vexMotorSet(kVexMotor_2, 0);}
 
 
         // Don't hog cpu

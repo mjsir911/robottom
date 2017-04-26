@@ -96,6 +96,10 @@ void buttonTestThingy(void) {
     }
 }
 
+//11 is left, 12 is right
+
+
+
 void autoMove(int steps) {
   int i = 0;
   while (i < steps) {
@@ -124,4 +128,30 @@ void turn(signed int degrees) {
 void runAutonomous(void) {
   //autoMove(25);
   turn(90);
+}
+
+
+void triggerButtons(void) {
+  signed char left = 0;
+  signed char right = 0;
+        if (vexControllerGet(Btn5D)) {
+          //turn(90);
+          left = -127;
+        }
+        if (vexControllerGet(Btn6D)) {
+          //turn(-90);
+          right = -127;
+        }
+
+        if (vexControllerGet(Btn5U)) {
+          //turn(1);
+          left = 127;
+        }
+        if (vexControllerGet(Btn6U)) {
+          //turn(-1);
+          right = 127;
+        }
+
+        if (left  != 0) {vexMotorSet(WHEEL_LEFT ,  left );}
+        if (right != 0) {vexMotorSet(WHEEL_RIGHT, -right);}
 }
