@@ -55,48 +55,15 @@ void drive(short vert, short hori) {
   wheelMotion(left, right);
 }
 
-/*
-void newSetMotorFunction(short vert, short hori) {
-  float e = 2.718281828459045;
-  int angle = creal(e**(X*1j)) / cimag(e**(X*1j));
-  //int angle = atan(vert/hori);
-  char speed = sqrt((hori*hori)+(vert*vert));
-  char setLeft = 0;
-  char setRight = 0;
-  
-  if      ((  0 < angle) && (angle <  90)) { setLeft =  127; }
-  else if (( 90 < angle) && (angle < 180)) { setLeft = (-0.031358 * x*x) + (5.64444 * x) -  127; } 
-  else if ((180 < angle) && (angle < 270)) { setLeft = -127; }
-  else if ((270 < angle) && (angle < 360)) { setLeft = (-0.031358 * x*x) + (22.5778 * x) - 3937; } 
-
-  if      ((  0 < angle) && (angle <  90)) { setRight =  127; }
-  else if (( 90 < angle) && (angle < 180)) { setRight = (-0.031358 * x*x) + (5.64444 * x) - 127; }
-  else if ((180 < angle) && (angle < 270)) { setRight = -127; }
-  else if ((270 < angle) && (angle < 360)) { setRight = (-0.031358 * x*x) + (11.2889 * x) - 889; }
-  wheelMotion(setLeft*speed+10, setRight*speed+10);
-}
-*/
-
 void pollMotion(void) {
   short vert = VERT;  
   short hori = HORI;
 
   drive(vert, hori);
-  //newSetMotorFunction(vert, hori);
 
 }
 
-void buttonTestThingy(void) {
-    if ( vexControllerGet(Btn5) ) {
-      int i = 0;
-      for (i = 0; i < 128; i++) {
-        wheelMotion(i, 127-i);
-        vexSleep(20);
-      }
-    }
-}
-
-void autoMove(int steps) {
+void move(signed int inches) {
   int i = 0;
   while (i < steps) {
     drive( 127, 0 );
