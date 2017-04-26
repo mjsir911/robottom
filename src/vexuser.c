@@ -92,8 +92,8 @@ msg_t vexOperator( void *arg ) {
         triggerButtons();
 
         
-        if      (vexControllerGet(Btn7)) {vexMotorSet(kVexMotor_2, 32);}
-        else if (vexControllerGet(Btn8)) {vexMotorSet(kVexMotor_2,-32);}
+        if      (vexControllerGet(Btn7)) {vexMotorSet(kVexMotor_2, 127);}
+        else if (vexControllerGet(Btn8)) {vexMotorSet(kVexMotor_2,-127);}
         else {vexMotorSet(kVexMotor_2, 0);}
 
 
