@@ -67,7 +67,7 @@ void pollMotion(void) {
 
 void move(signed int inches) {
   int i = 0;
-  while (i < steps) {
+  while (i < inches) {
     drive( 127, 0 );
     i++;
   }
