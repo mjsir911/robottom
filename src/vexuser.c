@@ -92,9 +92,9 @@ msg_t vexOperator( void *arg ) {
         triggerButtons();
 
         
-        if      (vexControllerGet(Btn7)) {vexMotorSet(kVexMotor_2, 127);}
-        else if (vexControllerGet(Btn8)) {vexMotorSet(kVexMotor_2,-127);}
-        else {vexMotorSet(kVexMotor_2, 0);}
+        if      (vexControllerGet(Btn7)) {armServos( 127);}
+        else if (vexControllerGet(Btn8)) {armServos(-127);}
+        else {armServos(0);}
 
 
         // Don't hog cpu
