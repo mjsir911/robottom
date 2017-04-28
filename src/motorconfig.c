@@ -22,14 +22,14 @@ vexDigiCfg dConfig[kVexDigital_Num] = {
 extern vexMotorCfg mConfig[kVexMotorNum];
 vexMotorCfg mConfig[kVexMotorNum] = {
         { kVexMotor_1,      kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 }, //Left  Wheel
-        { kVexMotor_2,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 }, //Left  Arm
-        { kVexMotor_3,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_2,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 }, //Left  Arm Lower
+        { kVexMotor_3,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 }, //Left  Arm Upper
         { kVexMotor_4,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_5,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_6,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_7,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_8,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_9,      kVexMotor393T,               kVexMotorReversed,     kVexSensorNone,        0 }, //Right Arm
+        { kVexMotor_8,      kVexMotorUndefined,          kVexMotorReversed,     kVexSensorNone,        0 }, //Right Arm Upper
+        { kVexMotor_9,      kVexMotor393T,               kVexMotorReversed,     kVexSensorNone,        0 }, //Right Arm Lower
         { kVexMotor_10,     kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 }  //Right Wheel
 };
 
@@ -92,7 +92,7 @@ void turn(signed int degrees) {
 
 void runAutonomous(void) {
   //autoMove(25);
-  turn(90);
+  //turn(90);
 }
 
 
@@ -121,9 +121,14 @@ void triggerButtons(void) {
         if (right != 0) {vexMotorSet(WHEEL_RIGHT, -right);}
 }
 
-#define ARM_LEFT  kVexMotor_2
-#define ARM_RIGHT kVexMotor_9
+#define ARM_LEFT_LOWER  kVexMotor_2
+#define ARM_RIGHT_LOWER kVexMotor_9
+#define ARM_LEFT_UPPER  kVexMotor_3
+#define ARM_RIGHT_UPPER kVexMotor_8
+
 void armServos(signed char speed) {
-  vexMotorSet(ARM_LEFT,  speed);
-  vexMotorSet(ARM_RIGHT, speed);
+  vexMotorSet(ARM_LEFT_LOWER,  speed);
+  vexMotorSet(ARM_RIGHT_LOWER, speed);
+  vexMotorSet(ARM_LEFT_UPPER,  -speed);
+  vexMotorSet(ARM_RIGHT_UPPER, -speed);
 }
