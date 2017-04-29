@@ -1,6 +1,5 @@
 #include "motorconfig.h"
 #include "vex.h"
-#include "complex.h"
 
 // Digi IO configuration
 extern vexDigiCfg dConfig[kVexDigital_Num];
@@ -126,9 +125,15 @@ void triggerButtons(void) {
 #define ARM_LEFT_UPPER  kVexMotor_3
 #define ARM_RIGHT_UPPER kVexMotor_8
 
-void armServos(signed char speed) {
-  vexMotorSet(ARM_LEFT_LOWER,  speed);
-  vexMotorSet(ARM_RIGHT_LOWER, speed);
-  vexMotorSet(ARM_LEFT_UPPER,  -speed);
-  vexMotorSet(ARM_RIGHT_UPPER, -speed);
+void pollArm() {
+  signed char vert = vexControllerGet(3);
+  signed char hori = vexControllerGet(4);
+  moveArm(vert);
+}
+
+void moveArm(signed char position) {
+  vexMotorSet(ARM_LEFT_LOWER,   position);
+  vexMotorSet(ARM_RIGHT_LOWER,  position);
+  vexMotorSet(ARM_LEFT_UPPER,  -position);
+  vexMotorSet(ARM_RIGHT_UPPER, -position);
 }
