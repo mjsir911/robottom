@@ -89,7 +89,12 @@ msg_t vexOperator( void *arg ) {
         
         pollMotion();
         triggerButtons();
-        pollArm();
+        if (vexControllerGet(Btn7)) {
+          moveArmWithButtons();
+        }
+        else {
+          pollArm();
+        }
 
         // Don't hog cpu
         vexSleep( 25 );

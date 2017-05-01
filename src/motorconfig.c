@@ -137,3 +137,27 @@ void moveArm(signed char position) {
   vexMotorSet(ARM_LEFT_UPPER,  -position);
   vexMotorSet(ARM_RIGHT_UPPER, -position);
 }
+
+void moveArmWithButtons(void) {
+  if (vexControllerGet(Btn7U) {
+    pickup();
+  }
+  else if (vexControllerGet(Btn7R) {
+    load();
+  }
+  else if (vexControllerGet(Btn7D) {
+    throw();
+  }
+}
+
+void pickup() {
+  moveArm(-127);
+}
+
+void load() {
+  moveArm(-75);
+}
+
+void throw() {
+  moveArm(127);
+}
