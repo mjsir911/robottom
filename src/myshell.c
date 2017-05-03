@@ -15,6 +15,12 @@ void shellMove(vexStream *chp, int argc, char *argv[]) {
   move(&argv[0]);
 }
 
+void getInputs(vexStream *chp, int argc, char *argv[]) {
+  (void)argc; // gotta stop dem errors
+  (void)argv;
+  chprintf(chp, "%i", vexDigitalPinGet(kVexDigital_11));
+}
+
 void shellMonitor( Thread *shelltp ) {
   while ( true ) {
     if ( !shelltp )

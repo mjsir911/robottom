@@ -16,6 +16,12 @@ void drive(short vert, short hori);
 #define HORI vexControllerGet(Ch2)
 void pollMotion(void);
 
+void pickup(void);
+void load(void);
+void move(signed int inches);
+
+void throwStar(void);
+
 void autoMove(int steps);
 void autoTurn(int steps);
 void runAutonomous(void);

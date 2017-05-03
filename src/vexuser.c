@@ -62,10 +62,23 @@ msg_t vexAutonomous( void *arg ) {
     while( TRUE ) {
         identifyOperator(25);
 
-        setContOn();
+        /*
+        //while (vexDigitalPinGet(kVexDigital_11) &
+            //vexDigitalPinGet(kVexDigital_12)) {
+          //move(25);
+        //}
+        //while (vexDigitalPinGet(kVexDigital_11)) {
+        while ( TRUE ) {
+          move(25);
+        }
+        move(-250);
+        turn(180);
+        move(-250);
+
 
         // Don't hog cpu
         //
+        */
         vexSleep( 25 );
         }
 

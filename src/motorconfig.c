@@ -65,11 +65,19 @@ void pollMotion(void) {
 //11 is left, 12 is right
 
 void move(signed int inches) {
-  int i = 0;
-  while (i < inches) {
-    drive( 127, 0 );
-    i++;
+  signed short dir;
+
+  if ( inches > 0 ) {
+    dir = -127;
+  } else if ( inches < 0 ) {
+    inches *= -1;
+    dir = 127;
+  } else {
+    dir = 0;
   }
+  wheelMotion(dir, -dir);
+  vexSleep(inches);
+  wheelMotion(0, 0); 
 }
 
 #define DEG2SEC(d) 1000 * d / 125
@@ -144,25 +152,25 @@ void moveArm(signed char position) {
 }
 
 void moveArmWithButtons(void) {
-  if (vexControllerGet(Btn7U) {
+  if (vexControllerGet(Btn7U)) {
     pickup();
   }
-  else if (vexControllerGet(Btn7R) {
+  else if (vexControllerGet(Btn7R)) {
     load();
   }
-  else if (vexControllerGet(Btn7D) {
-    throw();
+  else if (vexControllerGet(Btn7D)) {
+    throwStar();
   }
 }
 
-void pickup() {
+void pickup(void) {
   moveArm(-127);
 }
 
-void load() {
+void load(void) {
   moveArm(-75);
 }
 
-void throw() {
+void throwStar(void) {
   moveArm(127);
 }

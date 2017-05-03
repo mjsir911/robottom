@@ -2,6 +2,7 @@
 
 void marcoTest(vexStream *chp, int argc, char *argv[]);
 void shellMove(vexStream *chp, int argc, char *argv[]);
+void getInputs(vexStream *chp, int argc, char *argv[]);
 
 /*-----------------------------------------------------------------------------*/
 /* Command line related.                                                       */
@@ -21,6 +22,7 @@ static const ShellCommand commands[] = {
   {"test",    vexTestDebug},
   {"marco",   marcoTest},
   {"move",    shellMove},
+  {"inputs",  getInputs},
    {NULL, NULL}
 };
 
