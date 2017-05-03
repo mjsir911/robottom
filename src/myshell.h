@@ -1,6 +1,7 @@
 #include "vex.h"
 
 void marcoTest(vexStream *chp, int argc, char *argv[]);
+void shellMove(vexStream *chp, int argc, char *argv[]);
 
 /*-----------------------------------------------------------------------------*/
 /* Command line related.                                                       */
@@ -19,6 +20,7 @@ static const ShellCommand commands[] = {
   {"ime",     vexIMEDebug},
   {"test",    vexTestDebug},
   {"marco",   marcoTest},
+  {"move",    shellMove},
    {NULL, NULL}
 };
 

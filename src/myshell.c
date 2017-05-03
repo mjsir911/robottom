@@ -1,12 +1,18 @@
 #include "hal.h"
 #include "chprintf.h"
 #include "myshell.h"
+#include "motorconfig.h"
 
 // Custom commands go here
 void marcoTest(vexStream *chp, int argc, char *argv[]) {
   (void)argc; // gotta stop dem errors
   (void)argv;
   chprintf(chp, "hello world\r\n");
+}
+
+void shellMove(vexStream *chp, int argc, char *argv[]) {
+  (void)argc; // gotta stop dem errors
+  move(&argv[0]);
 }
 
 void shellMonitor( Thread *shelltp ) {
