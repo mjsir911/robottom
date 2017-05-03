@@ -126,9 +126,14 @@ void triggerButtons(void) {
 #define ARM_RIGHT_UPPER kVexMotor_8
 
 void pollArm() {
-  signed char vert = vexControllerGet(3);
-  signed char hori = vexControllerGet(4);
-  moveArm(vert);
+  if (vexControllerGet(Btn7)) {
+    moveArmWithButtons();
+  }
+  else {
+    signed char vert = vexControllerGet(3);
+    signed char hori = vexControllerGet(4);
+    moveArm(vert);
+  }
 }
 
 void moveArm(signed char position) {
