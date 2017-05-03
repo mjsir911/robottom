@@ -21,7 +21,7 @@ msg_t modeControl( void *arg ) {
   vexTaskRegister("modeControl");
 
   setAutoOn();
-  vexSleep(15 * 1000);
+  vexSleep(15 * 10);
   setContOn();
   //vexControllerCompetitionStateSet(1, kFlagDisabled);
 

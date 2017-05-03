@@ -1,6 +1,5 @@
 #include "motorconfig.h"
 #include "vex.h"
-#include "complex.h"
 
 // Digi IO configuration
 extern vexDigiCfg dConfig[kVexDigital_Num];
@@ -21,16 +20,16 @@ vexDigiCfg dConfig[kVexDigital_Num] = {
 
 extern vexMotorCfg mConfig[kVexMotorNum];
 vexMotorCfg mConfig[kVexMotorNum] = {
-        { kVexMotor_1,      kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_2,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_3,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
+        { kVexMotor_1,      kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 }, //Left  Wheel
+        { kVexMotor_2,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 }, //Left  Arm Lower
+        { kVexMotor_3,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 }, //Left  Arm Upper
         { kVexMotor_4,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_5,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_6,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
         { kVexMotor_7,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_8,      kVexMotorUndefined,          kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_9,      kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 },
-        { kVexMotor_10,     kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 }
+        { kVexMotor_8,      kVexMotorUndefined,          kVexMotorReversed,     kVexSensorNone,        0 }, //Right Arm Upper
+        { kVexMotor_9,      kVexMotor393T,               kVexMotorReversed,     kVexSensorNone,        0 }, //Right Arm Lower
+        { kVexMotor_10,     kVexMotor393T,               kVexMotorNormal,       kVexSensorNone,        0 }  //Right Wheel
 };
 
 void wheelMotion(signed char left, signed char right) {
@@ -92,12 +91,12 @@ void turn(signed int degrees) {
 
 void runAutonomous(void) {
   //autoMove(25);
-  turn(90);
+  //turn(90);
 }
 
 
 void triggerButtons(void) {
-  signed char left = 0;
+  signed char left  = 0;
   signed char right = 0;
         if (vexControllerGet(Btn5D)) {
           //turn(90);
@@ -119,4 +118,46 @@ void triggerButtons(void) {
 
         if (left  != 0) {vexMotorSet(WHEEL_LEFT ,  left );}
         if (right != 0) {vexMotorSet(WHEEL_RIGHT, -right);}
+}
+
+#define ARM_LEFT_LOWER  kVexMotor_2
+#define ARM_RIGHT_LOWER kVexMotor_9
+#define ARM_LEFT_UPPER  kVexMotor_3
+#define ARM_RIGHT_UPPER kVexMotor_8
+
+void pollArm() {
+  signed char vert = vexControllerGet(3);
+  signed char hori = vexControllerGet(4);
+  moveArm(vert);
+}
+
+void moveArm(signed char position) {
+  vexMotorSet(ARM_LEFT_LOWER,   position);
+  vexMotorSet(ARM_RIGHT_LOWER,  position);
+  vexMotorSet(ARM_LEFT_UPPER,  -position);
+  vexMotorSet(ARM_RIGHT_UPPER, -position);
+}
+
+void moveArmWithButtons(void) {
+  if (vexControllerGet(Btn7U) {
+    pickup();
+  }
+  else if (vexControllerGet(Btn7R) {
+    load();
+  }
+  else if (vexControllerGet(Btn7D) {
+    throw();
+  }
+}
+
+void pickup() {
+  moveArm(-127);
+}
+
+void load() {
+  moveArm(-75);
+}
+
+void throw() {
+  moveArm(127);
 }

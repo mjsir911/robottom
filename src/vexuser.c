@@ -89,20 +89,13 @@ msg_t vexOperator( void *arg ) {
     while (!chThdShouldTerminate()) {
         
         pollMotion();
-        
         triggerButtons();
-
-        
         if (vexControllerGet(Btn7)) {
-          vexMotorPositionSet(kVexMotor_2, -90);
-        }
-        else if (vexControllerGet(Btn8)) {
-          vexMotorPositionSet(kVexMotor_2, 90);
+          moveArmWithButtons();
         }
         else {
-          vexMotorPositionSet(kVexMotor_2, 0);
+          pollArm();
         }
-
 
         // Don't hog cpu
         vexSleep( 25 );
