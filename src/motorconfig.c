@@ -68,10 +68,10 @@ void move(signed int inches) {
   signed short dir;
 
   if ( inches > 0 ) {
-    dir = -127;
+    dir = 127;
   } else if ( inches < 0 ) {
     inches *= -1;
-    dir = 127;
+    dir = -127;
   } else {
     dir = 0;
   }

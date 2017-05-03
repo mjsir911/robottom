@@ -58,17 +58,13 @@ msg_t vexAutonomous( void *arg ) {
 
     // Must call this
     vexTaskRegister("auton");
+    bool shouldcontinue = TRUE;
 
-    while( TRUE ) {
+    while( shouldcontinue ) {
         identifyOperator(25);
 
-        /*
-        //while (vexDigitalPinGet(kVexDigital_11) &
-            //vexDigitalPinGet(kVexDigital_12)) {
-          //move(25);
-        //}
-        //while (vexDigitalPinGet(kVexDigital_11)) {
-        while ( TRUE ) {
+        while (vexDigitalPinGet(kVexDigital_11) &
+            vexDigitalPinGet(kVexDigital_12)) {
           move(25);
         }
         move(-250);
@@ -78,8 +74,8 @@ msg_t vexAutonomous( void *arg ) {
 
         // Don't hog cpu
         //
-        */
         vexSleep( 25 );
+        shouldcontinue = FALSE;
         }
 
     return (msg_t)0;
