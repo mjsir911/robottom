@@ -41,7 +41,8 @@ void vexUserSetup() {
  */
  
 void vexUserInit(void) {
-  vexAudioPlaySound(256, 100, 100); // say I'm awake
+  vexSpiTeamnameSet("Unknown 002?"); // team name
+  vexMotorPositionSet(kVexMotor_2, 90);
   chThdCreateStatic(waModeControl, sizeof(waModeControl), NORMALPRIO-1, modeControl, NULL);
 }
   
@@ -61,7 +62,7 @@ msg_t vexAutonomous( void *arg ) {
     while( TRUE ) {
         identifyOperator(25);
 
-        runAutonomous();
+        setContOn();
 
         // Don't hog cpu
         //
@@ -92,9 +93,15 @@ msg_t vexOperator( void *arg ) {
         triggerButtons();
 
         
-        if      (vexControllerGet(Btn7)) {vexMotorSet(kVexMotor_2, 127);}
-        else if (vexControllerGet(Btn8)) {vexMotorSet(kVexMotor_2,-127);}
-        else {vexMotorSet(kVexMotor_2, 0);}
+        if (vexControllerGet(Btn7)) {
+          vexMotorPositionSet(kVexMotor_2, -90);
+        }
+        else if (vexControllerGet(Btn8)) {
+          vexMotorPositionSet(kVexMotor_2, 90);
+        }
+        else {
+          vexMotorPositionSet(kVexMotor_2, 0);
+        }
 
 
         // Don't hog cpu
